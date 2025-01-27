@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+ 
 const UserSchema = new mongoose.Schema(
   {
     fullName: {
@@ -55,7 +55,7 @@ const UserSchema = new mongoose.Schema(
     subscription: {
       type: {
         type: String,
-        enum: ['FreeTrail', 'Organization'],
+        enum: ['FreeTrial', 'Organization'],
         required: false,
       },
       durationInDays: {
@@ -114,5 +114,5 @@ const UserSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
+ 
 module.exports = mongoose.model('User', UserSchema);

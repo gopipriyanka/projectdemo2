@@ -34,8 +34,8 @@ const createProject = async (req, res) => {
  
     // Determine organization name based on subscription type
     let selectedOrganizationName;
-    if (user.subscription.type === 'FreeTrail') {
-      selectedOrganizationName = 'Free Trail Organization';
+    if (user.subscription.type === 'FreeTrial') {
+      selectedOrganizationName = 'Free Trial Organization';
     } else if (user.subscription.type === 'Organization') {
       selectedOrganizationName = organizationName || 'Organization Default Name';
     } else {
