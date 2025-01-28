@@ -23,7 +23,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      'https://demoproject-xton.vercel.app', // Production URL (no trailing slash)
+      'https://demoproject1-topaz.vercel.app', // Production URL (no trailing slash)
       'http://localhost:3000', // Backend URL
       'http://localhost:3001', // Frontend URL
       'http://localhost:3002', // Additional frontend URL
