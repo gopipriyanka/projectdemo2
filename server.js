@@ -19,28 +19,29 @@ dotenv.config();
 
 const app = express();
 
-// Enable CORS
+// Enable CORS with enhanced configuration
 app.use(
   cors({
     origin: [
-      'https://demoproject1-topaz.vercel.app', // Production URL (no trailing slash)
-      'http://localhost:3000', // Backend URL
-      'http://localhost:3001', // Frontend URL
-      'http://localhost:3002', // Additional frontend URL
+      'https://demoproject1-topaz.vercel.app', // Production frontend
+      'http://localhost:3000', // Local backend
+      'http://localhost:3001', // Local frontend (port 3001)
+      'http://localhost:3002', // Additional local frontend (port 3002)
     ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    credentials: true, // Allow cookies and credentials
   })
 );
 
-// Handle preflight requests explicitly
+// Handle preflight requests for all routes
 app.options('*', cors());
 
 // Middleware to parse JSON and URL-encoded bodies
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Logging middleware
+// Logging middleware for request details
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
   console.log('Headers:', req.headers);
@@ -62,8 +63,8 @@ const initializeServer = async () => {
     app.use('/api/proj', projectRoutes); // Project routes
     app.use('/api/add-user', addUserRoutes); // Add user routes
     app.use('/api', serviceRoutes); // Service routes
-    app.use('/api/hubingest', hubIngestRoutes);
-    app.use('/api/subscriptions', subscriptionRoutes);
+    app.use('/api/hubingest', hubIngestRoutes); // Hub ingest routes
+    app.use('/api/subscriptions', subscriptionRoutes); // Subscription routes
 
     // Health check route
     app.get('/', (req, res) => {
